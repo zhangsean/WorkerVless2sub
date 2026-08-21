@@ -218,10 +218,30 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 
 ----
 
+## IPDB 自动更新优选 IP
+
+本仓库已接入 [ymyuuu/IPDB](https://github.com/ymyuuu/IPDB)，通过 GitHub Actions 定时刷新 `addressesapi.txt`，订阅生成器会继续按现有 `ADDAPI` / `addressesapi` 机制读取优选 IP。
+
+- 默认每 2 小时执行一次 `.github/workflows/update-ipdb-addresses.yml`。
+- 默认拉取 `https://ipdb.api.030101.xyz/?type=bestcf;bestproxy&country=true`。
+- 默认写入 `addressesapi.txt`，格式为 `IP:443#IPDB`，可直接用于 TLS 优选 IP。
+- 可在 Actions 页面手动运行 `Update IPDB addresses`，并通过 `ipdb_types` 调整 IPDB 类型，例如 `bestcf`、`bestproxy` 或 `bestcf;bestproxy`；通过 `ipdb_port` 调整写入端口。
+
+如需修改默认行为，可调整以下环境变量：
+
+| 变量 | 默认值 | 说明 |
+|--------|---------|-----|
+| IPDB_API_URL | `https://ipdb.api.030101.xyz/` | IPDB API 地址 |
+| IPDB_TYPES | `bestcf;bestproxy` | IPDB 类型，多个类型用分号分隔 |
+| IPDB_PORT | `443` | 写入 `addressesapi.txt` 的端口 |
+| IPDB_REMARK | `IPDB` | 写入备注前缀 |
+| IPDB_OUTPUT | `addressesapi.txt` | 输出文件路径 |
+
+----
+
 ## Star 星星走起
 [![Stargazers over time](https://starchart.cc/cmliu/WorkerVless2sub.svg?variant=adaptive)](https://starchart.cc/cmliu/WorkerVless2sub)
 
 # 致谢
 <a href="https://alice.ws/aff.php?aff=15"><img src="https://alicenetworks.net/templates/lagom2/assets/img/logo/logo_big.194980063.png" width="150" height="75" alt="Alice Networks LTD"/></a>，[SAKURA-YUMI](https://github.com/SAKURA-YUMI)，[EzSync](https://github.com/EzSync)、[ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash/config)、[3Kmfi6HP](https://github.com/6Kmfi6HP/EDtunnel/blob/main/.github/workflows/obfuscator.yml)
-
 

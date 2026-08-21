@@ -1,0 +1,39 @@
+name: Update IPDB addresses
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "15 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      ipdb_types:
+        description: "IPDB type list, separated by semicolons"
+        required: false
+        default: "bestcf;bestproxy"
+      ipdb_port:
+        description: "Port written to addressesapi.txt"
+        required: false
+        default: "443"
+
+jobs:
+  update_ipdb_addresses:
+    name: Update preferred IP list from IPDB
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+
+      - name: Generate addressesapi.txt
+        env:
+          IPDB_TYPES: ${{ github.event.inputs.ipdb_types || 'bestcf;bestproxy' }}
+          IPDB_PORT: ${{ github.event.inputs.ipdb_port || '443' }}
+        run: node scripts/update-ipdb-addresses.mjs
+
+      - name: Commit updated IP list
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "自动更新 IPDB 优选 IP"
+          file_pattern: addressesapi.txt
