@@ -222,7 +222,7 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 
 本仓库已接入 [ymyuuu/IPDB](https://github.com/ymyuuu/IPDB)，通过 GitHub Actions 定时刷新 `addressesapi.txt`，订阅生成器会继续按现有 `ADDAPI` / `addressesapi` 机制读取优选 IP。
 
-- 默认每 2 小时执行一次 `.github/workflows/update-ipdb-addresses.yml`。
+- 默认每天 UTC 01:15（北京时间 09:15）执行一次 `.github/workflows/update-ipdb-addresses.yml`。
 - 默认拉取 `https://ipdb.api.030101.xyz/?type=bestcf;bestproxy&country=true`。
 - 默认写入 `addressesapi.txt`，格式为 `IP:443#IPDB`，可直接用于 TLS 优选 IP。
 - 可在 Actions 页面手动运行 `Update IPDB addresses`，并通过 `ipdb_types` 调整 IPDB 类型，例如 `bestcf`、`bestproxy` 或 `bestcf;bestproxy`；通过 `ipdb_port` 调整写入端口。
